@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookAuthorController;
+use App\Http\Controllers\BookController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// route untuk menampilkan daftar buku dan author
-Route::get('/books', [BookAuthorController::class, 'index']);
+// Halaman utama menampilkan daftar buku
+Route::get('/', [BookController::class, 'index']);

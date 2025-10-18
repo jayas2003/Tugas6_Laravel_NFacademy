@@ -2,25 +2,23 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Author;
 
 class AuthorSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    use Illuminate\Support\Facades\DB;
+    public function run(): void
+    {
+        $authors = [
+            ['name' => 'J.K. Rowling', 'email' => 'jkrowling@example.com'],
+            ['name' => 'George R.R. Martin', 'email' => 'georgemartin@example.com'],
+            ['name' => 'Haruki Murakami', 'email' => 'murakami@example.com'],
+            ['name' => 'Andrea Hirata', 'email' => 'andrea@example.com'],
+            ['name' => 'Tere Liye', 'email' => 'tereliye@example.com'],
+        ];
 
-public function run(): void
-{
-    DB::table('authors')->insert([
-        ['name' => 'Ahmad Rizky', 'email' => 'ahmad@example.com', 'biography' => 'Penulis novel religi.'],
-        ['name' => 'Siti Nurhaliza', 'email' => 'siti@example.com', 'biography' => 'Penulis buku motivasi.'],
-        ['name' => 'Joko Santoso', 'email' => 'joko@example.com', 'biography' => 'Penulis buku teknologi.'],
-        ['name' => 'Rina Kartika', 'email' => 'rina@example.com', 'biography' => 'Penulis fiksi ilmiah.'],
-        ['name' => 'Bayu Saputra', 'email' => 'bayu@example.com', 'biography' => 'Penulis buku sejarah.'],
-    ]);
-}
-
+        foreach ($authors as $author) {
+            Author::create($author);
+        }
+    }
 }
