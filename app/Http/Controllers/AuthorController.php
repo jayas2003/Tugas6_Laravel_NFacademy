@@ -2,56 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
-use App\Models\Book;
 
-class BookController extends Controller
+class AuthorController extends Controller
 {
+    // Read all data
     public function index()
     {
-        return response()->json(Book::with('author')->get());
+        $authors = Author::all();
+        return response()->json($authors);
     }
 
-    public function show($id)
-    {
-        $book = Book::with('author')->find($id);
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
-        }
-        return response()->json($book);
-    }
-
+    // Create data
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required',
-            'genre' => 'required',
-            'author_id' => 'required|exists:authors,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:authors'
         ]);
 
-        $book = Book::create($validated);
-        return response()->json($book, 201);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $book = Book::find($id);
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
-        }
-
-        $book->update($request->all());
-        return response()->json($book);
-    }
-
-    public function destroy($id)
-    {
-        $book = Book::find($id);
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
-        }
-
-        $book->delete();
-        return response()->json(['message' => 'Book deleted successfully']);
+        $author = Author::create($validated);
+        return response()->json([
+            'message' => 'Author created successfully!',
+            'data' => $author
+        ], 201);
     }
 }
