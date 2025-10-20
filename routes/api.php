@@ -23,9 +23,6 @@ Route::get('/authors/{id}', [AuthorController::class, 'show']);
 Route::post('/authors', [AuthorController::class, 'store']);
 Route::put('/authors/{id}', [AuthorController::class, 'update']);
 Route::delete('/authors/{id}', [AuthorController::class, 'destroy']);
+Route::apiResource('genres', GenreController::class);
+Route::apiResource('authors', AuthorController::class);
 
-Route::get('/genres', [GenreController::class, 'index']);
-Route::post('/genres', [GenreController::class, 'store']);
-
-Route::get('/authors', [AuthorController::class, 'index']);
-Route::post('/authors', [AuthorController::class, 'store']);
