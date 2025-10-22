@@ -12,5 +12,13 @@ class DatabaseSeeder extends Seeder
             AuthorSeeder::class,
             BookSeeder::class,
         ]);
-    }
+
+        User::create([
+    'name' => 'Admin User',
+    'email' => 'admin@example.com',
+    'password' => bcrypt('password'),
+    'role' => 'admin'
+]);
+
+    }    
 }
